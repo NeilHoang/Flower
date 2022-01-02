@@ -1,0 +1,57 @@
+BODY {
+    background: #FFF;
+}
+
+svg {
+    overflow: visible;
+}
+
+.svg--parent {
+    width: 100%;
+    height: 95%;
+}
+
+.l-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.r-bounds {
+    fill: none;
+    /*   stroke: green */
+}
+
+$max: 15;
+$angle-step: 360/$max;
+
+.g-petals {
+    transform-origin: 60px 400px;
+    animation: rotate-360 20s infinite;
+}
+
+.g-petal {
+    transform-origin: 60px 415px;
+    @for $item from 1 through $max {
+        $angle: $angle-step * $item;
+        &:nth-of-type(#{$max}n+#{$item}){
+            transform: rotate(#{$angle}deg);
+            color: hsl($angle*3.2,95%,60%);
+        }
+    }
+}
+
+.g-petal use {
+    fill: currentColor;
+    transform-origin: 60px 250px;
+    mask: url(#mask);
+    animation: rotate-360 5s infinite;
+}
+
+@keyframes rotate-360 {
+    100% {
+        transform: rotate(360deg);
+    }
+}
